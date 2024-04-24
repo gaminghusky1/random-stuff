@@ -27,7 +27,6 @@ def main():
 
     object_types = ["rock", "paper", "scissors"]
     game_objects = []
-    game_over = False
     winner = None
 
     def draw_text(text, color, size, x, y, aligned="center"):
@@ -40,7 +39,7 @@ def main():
             text_rect.topleft = (x, y)
         screen.blit(text_surface, text_rect)
 
-    for i in range(100):
+    for i in range(150):
         game_objects.append(game_object.GameObject(object_types[random.randint(0, 2)], (random.randint(0, screen_width-30),
                             random.randint(0, screen_height-30)), (random.randint(-7, 7), random.randint(-7, 7))))
 
@@ -56,7 +55,6 @@ def main():
             element.load(screen)
 
         if len(still_exists) == 1:
-            game_over = True
             for element in game_objects:
                 element.velocity = (0, 0)
             if "rock" in still_exists:
@@ -66,7 +64,7 @@ def main():
             else:
                 winner = "scissors"
 
-        if game_over:
+        if winner is not None:
             screen.blit(darken_surface, (0, 0))
             if winner == "rock":
                 draw_text("Rock wins!", gray, 150, screen_width / 2, screen_height / 2.7)

@@ -39,5 +39,5 @@ class GameObject:
         for other_game_object in other_game_objects:
             if other_game_object != self and other_game_object.object_type == self.killer:
                 if self.rect.colliderect(other_game_object.rect):
-                    self.killer = self.killers[self.object_type]
+                    self.killer = self.killers[other_game_object.object_type]
                     self.object_type = other_game_object.object_type
